@@ -1,15 +1,17 @@
 const express =require('express')
 const path =require('path')
 const router =express.Router();
-const productsController=require('../controllers/products')
+const adminController=require('../controllers/admin')
 
 
 
 
 
-router.get('/add-product',productsController.getAddproduct)
+router.get('/add-product',adminController.getAddproduct)
 
-router.post('/add-product',productsController.postAddproduct)
+router.post('/add-product',adminController.postAddproduct)
+
+router.get('/products',adminController.getIndex)
 
 module.exports=router;
 // exports.routes=router;
