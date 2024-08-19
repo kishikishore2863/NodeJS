@@ -26,6 +26,6 @@ app.use(shopRoutes);
 
 
 
-app.use(erorrcontroller.get404)
+app.use(erorrcontroller.get404,)
 
 app.listen(3000);

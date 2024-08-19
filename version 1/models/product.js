@@ -14,35 +14,31 @@ const getProductsFromFile = (cb) => {
 
 module.exports = class Product {
   constructor(title,imageUrl,description,price) {
+    this.id=Math.floor(Math.random() * 1000000).toString();
     this.title = title;
     this.imageUrl=imageUrl;
     this.description=description;
     this.price=price;
   }
   save() {
-    // const p = path.join(__dirname,'../data/products.json')
-    // let products=[];
-    // fs.readFile(p,(err,fileContent)=>{
-    //     console.log(err)
-    //     if(!err){
-    //         products=JSON.parse(fileContent)
-    //     }
-    //     products.push(this);
-    //     fs.writeFile(p,JSON.stringify(products),(err)=>{
-    //         console.log(err)
-    //     });
-    // })
-
-    getProductsFromFile(products=>{
-        products.push(this);
-        fs.writeFile(p,JSON.stringify(products),err=>{
-            console.log(err);
-        })
+      getProductsFromFile(products=>{
+      products.push(this);
+      fs.writeFile(p,JSON.stringify(products),err=>{
+        console.log(err)
+      })
     })
- 
   }
 
   static fetchAll(cb) {
     getProductsFromFile(cb);
   }
+
+  static findById(id,cb){
+    getProductsFromFile(products=>{
+      const product = products.find(p =>p.id === id);
+      cb(product)
+    })
+  }
 };
+
+
