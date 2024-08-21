@@ -34,4 +34,24 @@ const Product =require('../models/product')
     })
  }
 
-
+exports.getEditProduct=(req,res,next)=>{
+  const editMode =req.query.edit;
+  if(!editMode){
+    return res.redirect('/')
+  }
+  const prodId =req.params.productId;
+  Product.findById(prodId,product =>{
+    if(!product){
+      return res.redirect('/')
+    }
+ 
+ 
+    res.render('admin/add-product',{
+      pageTitle:'Edit product',
+      path:'/admin/edit-product',
+      editing:editMode,
+      product:product
+    })
+  }
+)
+}
