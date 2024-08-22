@@ -8,6 +8,7 @@ const Product =require('../models/product')
       formsCSS: true,
       productCSS: true,
       activeAddProduct: true,
+      editing:false
      
    });
  }
