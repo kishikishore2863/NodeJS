@@ -30,7 +30,6 @@ const p = path.join(__dirname, "../data/cart.json");
           
 //         });
 //       }
-    
 //   };
 
 module.exports = class Cart {
@@ -80,7 +79,18 @@ module.exports = class Cart {
       })
      }
 
-
+    static getCart(cb){
+       fs.readFile(p,(err,data)=>{
+        const cart = JSON.parse(data)
+        if(err){
+          console.log(err)
+          cb(null)
+        }else{
+          cb(cart)
+        }
+         
+       })
+    }
 
   };
 

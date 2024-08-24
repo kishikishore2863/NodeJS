@@ -5,14 +5,17 @@
 <body>
     <%- include('../includes/navigation.ejs') %>
     <main>
-        <h1><%= product.title %></h1>
+        <h1 style="text-align: center;"><%= product.title %></h1>
         <hr>
-        <div>
-            <img src="<%= product.imageUrl %>" alt="">
+        <div style="display: flex; justify-content: center;" >
+            <img width="300px" height="400px" src="<%= product.imageUrl %>" alt="">
         </div>
-        <h2><%= product.price %></h2>
-        <p><%= product.description %></p>
-        <%- include('../includes/add-to-cart.ejs',{product:product}) %>
+        <h2 style="text-align: center;"><%= product.price %></h2>
+        <p style="text-align: center;"><%= product.description %></p>
+        <form style="display: flex; justify-content: center;" action="/cart" method="POST">
+            <input type="hidden" name="productId" value="<%= product.id %>">
+            <button class="btn" type="sumbit">Add to cart</button>
+        </form>
     </main>
 
     <%- include('../includes/end.ejs') %>    

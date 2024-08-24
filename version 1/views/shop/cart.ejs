@@ -5,4 +5,44 @@
 <body>
     <%- include('../includes/navigation.ejs') %>
 
+    <main>
+        <% if(products.length > 0){  %>
+            
+                <% products.forEach(p =>{ %>
+                    <div style="display: flex; margin-bottom: 50px; ">
+                        <div style="width: 40%; padding-left: 5%;">
+                            <img  width="300px" height="400px" src="<%= p.productData.imageUrl %>"
+                                alt="<%=  p.productData.title %>">
+                        </div>
+                       
+                        
+                        <div style="width: 40%;">
+                            <div>
+                                <h1 class=""><%= p.productData.title %></h1>
+                                <h2 class="">$<%= p.productData.price %></h2>
+                                <p class=""><%= p.productData.description %></p>
+                            </div>
+                          
+                           
+                        </div>
+                        <div style="">
+                            <h2>Price : $<%= p.productData.price %></h2>
+                            <h4>quantity : <%= p.qty %> </h4>
+
+                        </div>
+                        
+                        
+                        
+                        
+                        <!-- <%= p.productData.title %> (<%= p.qty %>) -->
+                    </div>
+
+               <% }) %>
+        
+          <% } else { %>
+            <h1> No Products in Cart!</h1>
+          <% } %>    
+
+    </main>
+
     <%- include('../includes/end.ejs') %>    
