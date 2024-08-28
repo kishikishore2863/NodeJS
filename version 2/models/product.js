@@ -14,17 +14,16 @@ const getProductsFromFile = (callback) => {
 };
 
 module.exports = class Product {
-  constructor(id,title,imageUrl,description,price) {
-    this.id = id;
+  constructor(title,imageUrl,description,price) {
     this.title = title;
     this.imageUrl=imageUrl;
     this.description=description;
-    this.price=price;
+    this.price=price ? parseFloat(price) : null;;
   }
   save() {
     return db.execute(
-      'INSERT INTO products (title,price,imageUrl,description) VALUES (?, ?, ?, ?)',
-      [this.title, this.price, this.imageUrl, this.description]
+      'INSERT INTO products (title,imageUrl,description,price) VALUES (?, ?, ?, ?)',
+      [this.title, this.imageUrl, this.description, this.price]
     )
   }
 

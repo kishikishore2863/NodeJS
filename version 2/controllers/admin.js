@@ -20,8 +20,9 @@ const Product =require('../models/product')
   const description=req.body.description;
   const product =new Product(title,imageUrl,description,price);
 
-  product.save().then(
-    res.redirect('/')
+  product.save().then(() => {
+      console.log('Product saved successfully');
+      res.redirect('/')}
   ).catch(err=>console.log(err))
  
 }
