@@ -14,7 +14,8 @@ const getProductsFromFile = (callback) => {
 };
 
 module.exports = class Product {
-  constructor(title,imageUrl,description,price) {
+  constructor(id,title,imageUrl,description,price) {
+    this.id = id;
     this.title = title;
     this.imageUrl=imageUrl;
     this.description=description;
@@ -32,8 +33,8 @@ module.exports = class Product {
   }
 
  
-  static findById(id,cb){
-   
+  static findById(id){
+   return db.execute('SELECT * FROM products WHERE products.id = ?', [id]);
   }
   
   static deleteById(id){
@@ -48,11 +49,6 @@ module.exports = class Product {
       })
     })
   }
-
-  
-
-
-
 };
 
 
