@@ -31,7 +31,7 @@ const Product =require('../models/product')
  exports.getProducts=(req,res,next)=>{
        Product.fetchAll()
        .then((([rows,fieldData])=>{ 
-         res.render("shop/index", {
+         res.render("admin/products", {
          prods: rows,
          pageTitle: "Admin Products",
          path: "/admin/products"
