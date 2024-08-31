@@ -7,9 +7,6 @@ interface Game{
 }
 
 
-
-
-
 export class GameManager{
     games:Game[]=[];
     constructor(){
