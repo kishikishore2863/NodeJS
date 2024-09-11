@@ -1,5 +1,6 @@
 const Product = require("../models/product");
 const Cart = require("../models/cart");
+const { json } = require("body-parser");
 exports.getProducts = (req, res, next) => {
   const product = Product.fetchAll((products) => {
     res.render("shop/product-list", {
@@ -19,24 +20,17 @@ exports.postAddproduct = (req, res, next) => {
 };
 
 exports.getIndex = (req, res, next) => {
-  // Product.fetchAll(products=>{
-  //     res.render('shop/index',{
-  //         prods:products,
-  //         pageTitle:'Shop',
-  //         hasProducts:products.length>0,
-  //         activeShop:true,
-  //         productCSS:true
-  //     })
-  // })
   Product.fetchAll((products) => {
-    res.render("shop/index", {
-      prods: products,
-      pageTitle: "Shop",
-      path: "/",
-      hasProducts: products.length > 0,
-      activeShop: true,
-      productCSS: true,
-    });
+    // res.render("shop/index", {
+    //   prods: products,
+    //   pageTitle: "Shop",
+    //   path: "/",
+    //   hasProducts: products.length > 0,
+    //   activeShop: true,
+    //   productCSS: true,
+    // });
+    res.send(products)
+    console.log(products)
   });
 };
 
