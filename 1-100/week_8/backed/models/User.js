@@ -30,10 +30,16 @@ const userShema =new mongoose.Schema({
 })
 
 const AccountScehma = new mongoose.Schema({
-    userId:{
-        type:mongoose.Schema.ObjectId,
+    userId:{ 
+        type: mongoose.Schema.Types.ObjectId,
         ref:'User',
         required:true
+    },
+    username: {
+        type: String,
+        required: true,
+        trim: true,
+        lowercase: true,
     },
     balance:{
      type:Number,

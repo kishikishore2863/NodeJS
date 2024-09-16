@@ -1,24 +1,31 @@
 const express =require('express')
 const router =express.Router()
-const {Account}=require('../models/User')
-// const {Auth}=require('../utils/middleware')
+const {User,Account}=require('../models/User')
+const {Auth}=require('../utils/middleware')
 const { default: mongoose } = require('mongoose')
+const ObjectId =require('mongoose')
 
 
-router.post("/balance",async(req,res)=>{
+router.get("/balance", Auth, async (req, res) => {
     const account = await Account.findOne({
-        userId:req.userId
+        userId: req.userId
+    });
+
+    res.json({
+        balance: account.balance
     })
-    return res.json({balance:account.balance})  
-})
+});
 
 
-router.post("/transfer",async(req,res)=>{
+
+
+router.post("/transfer",Auth,async(req,res)=>{
     const session = await mongoose.startSession();
     session.startTransaction();
     const {amount,to}=req.body
 
     const account = await Account.findOne({userId:req.userId}).session(session)
+
 
     if(!account || account.balance < amount ){
         await session.abortTransaction()

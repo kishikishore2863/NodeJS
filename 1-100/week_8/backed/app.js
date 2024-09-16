@@ -1,7 +1,7 @@
 const express =require('express');
 const connectDB =require('./config/database_config')
 const dotenv = require('dotenv');
-// const cors =require('cors');
+const cors =require('cors');
 const User =require('./models/User')
 const router =require('./routes/index')
 
@@ -10,7 +10,7 @@ dotenv.config();
 connectDB()
 
 
-// app.use(cors)
+app.use(cors())
 app.use(express.json())
 
 app.use("/api/v1",router)
