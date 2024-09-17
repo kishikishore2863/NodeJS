@@ -1,4 +1,4 @@
-
+import Logout from "./LogOut"
 
 const Appbar = () => {
   return (<div className="shadow h-14 flex justify-between">
@@ -6,6 +6,7 @@ const Appbar = () => {
         PayTM App
     </div>
     <div className="flex">
+        <Logout/>
         <div className="flex flex-col justify-center h-full mr-4">
             Hello
         </div>

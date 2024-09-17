@@ -1,9 +1,19 @@
-import Appbar from "../components/Appbar"
+import Appbar from "../components/Appbar";
+import Balance from "../components/Balance";
+
+
 const Dashboard = () => {
+ 
 
+
+  
   return (
-<Appbar/>
-  )
-}
+    <>
+      <Appbar />
+      <Balance />
+     
+    </>
+  );
+};
 
-export default Dashboard
+export default Dashboard;

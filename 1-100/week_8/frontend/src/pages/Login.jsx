@@ -1,23 +1,18 @@
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
+// import { jwtDecode } from "jwt-decode";
+
 
 
 const Login = () => {
+  const cookies = new Cookies()
   const navigate = useNavigate()
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-
-
-  useEffect(()=>{
-    const token = localStorage.getItem('token');
-    if (token) {
-      navigate('/dashboard');
-    }
-  }, [navigate]);
-  
 
 
 
@@ -32,7 +27,8 @@ const Login = () => {
         console.log(data);
         if (data.token) {
             // Store the token in localStorage (or sessionStorage)
-            localStorage.setItem('token', data.token);
+            // localStorage.setItem("token", data.token);
+            cookies.set("token",data.token)
     
             // Redirect user to dashboard or protected route
             navigate('/dashboard');
