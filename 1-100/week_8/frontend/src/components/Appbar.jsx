@@ -1,23 +1,52 @@
-import Logout from "./LogOut"
+import { useNavigate } from 'react-router-dom';
+import { Logout } from "../utils/GlobalContext";
+import { DollarSign, LogOut, UserIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import Cookies from 'universal-cookie';
+
 
 const Appbar = () => {
-  return (<div className="shadow h-14 flex justify-between">
-    <div className="flex flex-col justify-center h-full ml-4">
-        PayTM App
-    </div>
-    <div className="flex">
-        <Logout/>
-        <div className="flex flex-col justify-center h-full mr-4">
-            Hello
-        </div>
-        <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-2">
-            <div className="flex flex-col justify-center h-full text-xl">
-                U
-            </div>
-        </div>
-    </div>
-</div>
-  )
-}
+    const navigate = useNavigate();
+    const cookies =new Cookies
+    const[info,setInfo]=useState('')
 
-export default Appbar
+    const handleLogout = () => {
+      Logout();
+      navigate('/login'); // Redirect to the login page after logout
+    };
+
+    const fetchData= async ()=>{
+        await axios.get("http://localhost:3008/api/v1/account/info",{
+        headers:{
+         Authorization:`Bearer ${cookies.get("token")}`
+        }
+      }).then(res=>setInfo(res.data.firstName))
+    }
+  
+  useEffect(()=>{
+    fetchData();
+  },[])
+
+  return (
+    <header className="bg-white shadow">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center">
+            <DollarSign className="h-8 w-8 text-blue-500" />
+            <span className="ml-2 text-xl font-semibold">PayTM App</span>
+          </div>
+          <div className="flex items-center">
+            <span className="mr-4">Hello, {info}</span>
+            <div className="relative">
+              <UserIcon className="h-8 w-8 text-gray-500" />
+            </div>
+            <LogOut onClick={handleLogout} className="h-6 w-6 ml-4 text-gray-500 cursor-pointer" />
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Appbar;

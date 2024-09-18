@@ -39,6 +39,10 @@ const Login = () => {
     console.log('Login submitted', { username, password });
   };
 
+const handleNavigate=()=>{
+  navigate("/signup")
+}
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -109,6 +113,10 @@ const Login = () => {
               >
                 Sign in
               </button>
+            </div>
+            <div>
+              <span>Don't have an account?</span> <span onClick={handleNavigate} className='text-blue-500 cursor-pointer'>Signup</span>
+
             </div>
           </form>
 

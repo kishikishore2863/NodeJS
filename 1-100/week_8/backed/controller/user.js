@@ -6,7 +6,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
-const {User} =require("../models/User")
+const {User,Account,Transaction} =require("../models/User")
+
 
 
 
@@ -37,6 +38,13 @@ router.post("/signup", async (req,res)=>{
  
 
     const dbUser =await User.create(body);
+    const dbAccount = await Account.create({
+        userId: dbUser._id, // Use dbUser._id, not body._id
+        username: body.username,
+        balance: 0
+    });
+    const dbTransaction =await Transaction.create();
+
     const token =jwt.sign({userId:dbUser._id},JWT_SECRET)
     res.json({
         message:"User created successfully",
